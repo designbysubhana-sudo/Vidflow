@@ -1,33 +1,18 @@
 /* =============================================
-   VIDFLOW AUTH GUARD & CORE APP
+   VIDFLOW CREATOR DASHBOARD
 ============================================= */
 
-const currentUser = JSON.parse(
-  localStorage.getItem("vidflowCurrentUser")
-);
-
-if (!currentUser) {
-  window.location.href = "login.html";
-}
-
-/* POPULATE LOGGED-IN USER INFO */
+/* POPULATE CREATOR PROFILE INFO */
 const profileName = document.querySelector(".profile strong");
-if (profileName && currentUser) {
-  profileName.textContent = currentUser.name;
-}
-
 const welcomeText = document.getElementById("welcomeText");
-if (welcomeText && currentUser) {
-  welcomeText.textContent = `WELCOME BACK, ${currentUser.name.toUpperCase()} 👋`;
+
+const savedProfileName = localStorage.getItem("vidflowProfileName") || "Subhana";
+if (profileName) {
+  profileName.textContent = savedProfileName;
 }
 
-/* LOGOUT BUTTON */
-const logoutButton = document.getElementById("logoutButton");
-if (logoutButton) {
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("vidflowCurrentUser");
-    window.location.href = "login.html";
-  });
+if (welcomeText) {
+  welcomeText.textContent = `WELCOME BACK, ${savedProfileName.toUpperCase()} 👋`;
 }
 
 
@@ -806,12 +791,6 @@ if (editProfileButton) {
       localStorage.setItem("vidflowProfileName", newName);
       if (profileName) profileName.textContent = newName;
       if (welcomeText) welcomeText.textContent = `WELCOME BACK, ${newName.toUpperCase()} 👋`;
-
-      /* Update currentUser in storage */
-      if (currentUser) {
-        currentUser.name = newName;
-        localStorage.setItem("vidflowCurrentUser", JSON.stringify(currentUser));
-      }
     }
 
     if (newEmail) {
