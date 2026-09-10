@@ -95,53 +95,120 @@ if (quickAnalytics) {
 
 
 /* =============================================
-   SAMPLE VIDEO DATABASE
+   YOUTUBE API SERVICE (MODULAR ABSTRACTION)
 ============================================= */
 
-const defaultVideos = [
-  {
-    id: 1,
-    title: "How I Plan My Content",
-    date: "2026-08-22",
-    time: "11:00",
-    status: "published"
+const YouTubeService = {
+  async connectChannel() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        localStorage.setItem("youtubeConnected", "true");
+        resolve({
+          connected: true,
+          channelName: "Subhana Official",
+          subscribers: "12.4K"
+        });
+      }, 200);
+    });
   },
-  {
-    id: 2,
-    title: "My Productivity Setup",
-    date: "2026-08-29",
-    time: "14:30",
-    status: "published"
+
+  async disconnectChannel() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        localStorage.setItem("youtubeConnected", "false");
+        resolve({ connected: false });
+      }, 200);
+    });
   },
-  {
-    id: 3,
-    title: "Q&A With Subscribers",
-    date: "2026-09-03",
-    time: "16:00",
-    status: "published"
+
+  async fetchChannelStats() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          subscribers: "12,480",
+          views: "148,200",
+          watchTime: "4,320 hrs",
+          growth: "+20%"
+        });
+      }, 150);
+    });
   },
-  {
-    id: 4,
-    title: "UI/UX Design Tips",
-    date: "2026-09-15",
-    time: "10:00",
-    status: "scheduled"
-  },
-  {
-    id: 5,
-    title: "My Workspace Tour",
-    date: "2026-09-22",
-    time: "12:00",
-    status: "scheduled"
-  },
-  {
-    id: 6,
-    title: "New Video Idea",
-    date: "2026-09-18",
-    time: "",
-    status: "draft"
+
+  async uploadVideo(videoData) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+          youtubeId: "yt_" + Date.now(),
+          ...videoData
+        });
+      }, 300);
+    });
   }
-];
+};
+
+
+/* =============================================
+   SAMPLE VIDEO DATABASE (DYNAMIC DATE GENERATION)
+============================================= */
+
+function generateDefaultVideos() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const prevMonthDate = new Date(year, month - 1, 22);
+  const latePrevMonthDate = new Date(year, month - 1, 29);
+  const earlyCurrMonthDate = new Date(year, month, 3);
+  const midCurrMonthDate = new Date(year, month, 15);
+  const lateCurrMonthDate = new Date(year, month, 22);
+  const draftDate = new Date(year, month, 18);
+
+  return [
+    {
+      id: 1,
+      title: "How I Plan My Content",
+      date: formatDateForDatabase(prevMonthDate),
+      time: "11:00",
+      status: "published"
+    },
+    {
+      id: 2,
+      title: "My Productivity Setup",
+      date: formatDateForDatabase(latePrevMonthDate),
+      time: "14:30",
+      status: "published"
+    },
+    {
+      id: 3,
+      title: "Q&A With Subscribers",
+      date: formatDateForDatabase(earlyCurrMonthDate),
+      time: "16:00",
+      status: "published"
+    },
+    {
+      id: 4,
+      title: "UI/UX Design Tips",
+      date: formatDateForDatabase(midCurrMonthDate),
+      time: "10:00",
+      status: "scheduled"
+    },
+    {
+      id: 5,
+      title: "My Workspace Tour",
+      date: formatDateForDatabase(lateCurrMonthDate),
+      time: "12:00",
+      status: "scheduled"
+    },
+    {
+      id: 6,
+      title: "New Video Idea",
+      date: formatDateForDatabase(draftDate),
+      time: "",
+      status: "draft"
+    }
+  ];
+}
 
 
 /* =============================================
@@ -150,8 +217,8 @@ const defaultVideos = [
 
 let videos = JSON.parse(localStorage.getItem("vidflowVideos"));
 
-if (!videos) {
-  videos = defaultVideos;
+if (!videos || !Array.isArray(videos) || videos.length === 0) {
+  videos = generateDefaultVideos();
   saveVideos();
 }
 
@@ -684,12 +751,14 @@ let youtubeConnected = localStorage.getItem("youtubeConnected") !== "false";
 if (disconnectButton) {
   updateYoutubeButton();
 
-  disconnectButton.addEventListener("click", () => {
+  disconnectButton.addEventListener("click", async () => {
     if (youtubeConnected) {
       const answer = confirm("Disconnect YouTube channel?");
       if (!answer) return;
+      await YouTubeService.disconnectChannel();
       youtubeConnected = false;
     } else {
+      await YouTubeService.connectChannel();
       youtubeConnected = true;
       alert("YouTube channel connected.");
     }
