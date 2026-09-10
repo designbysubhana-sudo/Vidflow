@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VidFlow - Creator Content Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+          </svg>
+        </div>
+        <h2>VidFlow</h2>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-page="home">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" data-page="dashboard">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-page="upload">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+            <polyline points="12 13 12 9 9 12"></polyline>
+            <polyline points="12 9 15 12"></polyline>
+          </svg>
+          <span>Upload</span>
+        </button>
+
+        <button class="nav-item" data-page="planner">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Planner</span>
+        </button>
+
+        <button class="nav-item" data-page="settings">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="profile">
+        <div class="avatar-img">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Subhana Profile">
+        </div>
+        <div class="profile-info">
+          <strong>Subhana</strong>
+          <p>Creator</p>
+        </div>
+        <button id="logoutButton" class="icon-btn logout-btn" title="Logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div class="search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search videos, ideas, or anything..."
+          />
+        </div>
+
+        <div class="top-actions">
+          <button class="icon-btn notification-btn" title="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="small-avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Subhana Profile">
+          </div>
+        </div>
+      </header>
+
+      <!-- HOME PAGE -->
+      <section id="home" class="page active-page">
+
+        <div class="hero-grid">
+
+          <div class="hero-card">
+            <p class="welcome-tag" id="welcomeText">WELCOME BACK 👋</p>
+            <h1>Create Better Content <span class="highlight-red">Everyday.</span></h1>
+            <p class="hero-subtext">
+              Plan, upload and manage your YouTube content — all in one place.
+            </p>
+
+            <div class="hero-buttons">
+              <button class="primary-btn" id="homeUploadButton">
+                Upload Video 
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+
+              <button class="outline-btn" id="quickPlanner">
+                Plan Your Content
+              </button>
+            </div>
+          </div>
+
+          <div class="next-video-card">
+            <div class="next-video-header">
+              <div class="card-subtitle-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Next Scheduled Video</span>
+              </div>
+              <span class="due-tag">Tomorrow</span>
+            </div>
+
+            <div class="scheduled-content-body">
+              <div class="scheduled-thumb">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="UI/UX Design Tips Thumbnail">
+                <span class="duration-badge">10:24</span>
+              </div>
+
+              <div class="scheduled-details">
+                <h3>UI/UX Design Tips</h3>
+                <div class="scheduled-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <span>Tomorrow, 10:00 AM</span>
+                </div>
+                <span class="badge badge-scheduled">Scheduled</span>
+              </div>
+
+              <button class="options-btn" title="Options">⋮</button>
+            </div>
+
+            <button class="secondary-action-btn" id="quickUpload">
+              Upload Video
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- STATS GRID -->
+        <div class="stats">
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-emerald">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="stat-change text-emerald">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                20%
+              </div>
+            </div>
+            <div class="stat-value-group">
+              <h2>3</h2>
+              <p class="stat-title">Published</p>
+              <p class="stat-comparison">+3 from last month</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                </svg>
+              </div>
+              <div class="stat-change text-emerald">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                33%
+              </div>
+            </div>
+            <div class="stat-value-group">
+              <h2>2</h2>
+              <p class="stat-title">Scheduled</p>
+              <p class="stat-comparison">+1 from last month</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+              </div>
+              <div class="stat-change text-emerald">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                0%
+              </div>
+            </div>
+            <div class="stat-value-group">
+              <h2>1</h2>
+              <p class="stat-title">Drafts</p>
+              <p class="stat-comparison">No change</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-rose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </div>
+              <div class="stat-change text-emerald">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                12%
+              </div>
+            </div>
+            <div class="stat-value-group">
+              <h2>1.2K</h2>
+              <p class="stat-title">Total Views</p>
+              <p class="stat-comparison">+128 from last month</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- LOWER DASHBOARD GRID -->
+        <div class="home-main-grid">
+
+          <!-- RECENT UPLOADS -->
+          <div class="content-card uploads-card">
+            <div class="card-title">
+              <h2>Recent Uploads</h2>
+              <button class="text-link-btn" id="quickAnalytics">View all</button>
+            </div>
+
+            <div class="video-list">
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=200&q=80" alt="Video thumbnail">
+                  <span class="thumb-duration">10:24</span>
+                </div>
+                <div class="video-info">
+                  <h4>How I Plan My Content</h4>
+                  <p class="video-meta">22 Aug 2026 • 1.4K views</p>
+                </div>
+                <span class="badge badge-published">Published</span>
+                <button class="options-btn">⋮</button>
+              </div>
+
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=200&q=80" alt="Video thumbnail">
+                  <span class="thumb-duration">08:15</span>
+                </div>
+                <div class="video-info">
+                  <h4>My Productivity Setup</h4>
+                  <p class="video-meta">29 Aug 2026 • 2.1K views</p>
+                </div>
+                <span class="badge badge-published">Published</span>
+                <button class="options-btn">⋮</button>
+              </div>
+
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=200&q=80" alt="Video thumbnail">
+                  <span class="thumb-duration">07:40</span>
+                </div>
+                <div class="video-info">
+                  <h4>UI/UX Design Tips</h4>
+                  <p class="video-meta">15 Sep 2026 • 10:00 AM</p>
+                </div>
+                <span class="badge badge-scheduled">Scheduled</span>
+                <button class="options-btn">⋮</button>
+              </div>
+
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=200&q=80" alt="Video thumbnail">
+                  <span class="thumb-duration">12:05</span>
+                </div>
+                <div class="video-info">
+                  <h4>Q&A with Subscribers</h4>
+                  <p class="video-meta">3 Sep 2026 • 3.2K views</p>
+                </div>
+                <span class="badge badge-published">Published</span>
+                <button class="options-btn">⋮</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHANNEL GROWTH CHART -->
+          <div class="content-card growth-card">
+            <div class="card-title">
+              <h2>Channel Growth</h2>
+              <select class="timeframe-select">
+                <option value="30">Last 30 Days</option>
+                <option value="90">Last 90 Days</option>
+                <option value="365">This Year</option>
+              </select>
+            </div>
+
+            <div class="growth-metric-header">
+              <div class="big-metric">
+                <span class="metric-num">1.2K</span>
+                <span class="metric-label">Total Views</span>
+              </div>
+              <div class="growth-badge-container">
+                <span class="badge-growth-pill">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                  12%
+                </span>
+                <p class="growth-subtext">+128 from last month</p>
+              </div>
+            </div>
+
+            <!-- SVG Smooth Area Chart -->
+            <div class="chart-container">
+              <svg viewBox="0 0 500 200" preserveAspectRatio="none" class="growth-svg">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ff174f" stop-opacity="0.4" />
+                    <stop offset="100%" stop-color="#ff174f" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="40" x2="500" y2="40" stroke="#1f2733" stroke-dasharray="3,3" />
+                <line x1="0" y1="90" x2="500" y2="90" stroke="#1f2733" stroke-dasharray="3,3" />
+                <line x1="0" y1="140" x2="500" y2="140" stroke="#1f2733" stroke-dasharray="3,3" />
+                <line x1="0" y1="180" x2="500" y2="180" stroke="#1f2733" />
+
+                <path d="M 0 170 Q 70 110, 120 145 T 250 80 T 370 100 T 500 20 L 500 180 L 0 180 Z" fill="url(#chartGradient)" />
+                <path d="M 0 170 Q 70 110, 120 145 T 250 80 T 370 100 T 500 20" fill="none" stroke="#ff174f" stroke-width="3" stroke-linecap="round" />
+              </svg>
+              <div class="chart-y-axis">
+                <span>3K</span>
+                <span>2K</span>
+                <span>1K</span>
+                <span>0</span>
+              </div>
+              <div class="chart-x-axis">
+                <span>Aug 10</span>
+                <span>Aug 17</span>
+                <span>Aug 24</span>
+                <span>Aug 31</span>
+                <span>Sep 7</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- DASHBOARD PAGE -->
+      <section id="dashboard" class="page">
+
+        <div class="page-heading">
+          <h1>Dashboard Analytics</h1>
+          <span>Track and optimize your channel performance in real-time.</span>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-rose">📊</div>
+              <div class="stat-change text-emerald">↑ 12%</div>
+            </div>
+            <div class="stat-value-group">
+              <h2>1.2K</h2>
+              <p class="stat-title">Total Views</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-emerald">👥</div>
+              <div class="stat-change text-emerald">↑ 8%</div>
+            </div>
+            <div class="stat-value-group">
+              <h2>320</h2>
+              <p class="stat-title">Subscribers</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-blue">❤️</div>
+              <div class="stat-change text-emerald">↑ 15%</div>
+            </div>
+            <div class="stat-value-group">
+              <h2>480</h2>
+              <p class="stat-title">Likes</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon-wrapper icon-amber">💬</div>
+              <div class="stat-change text-emerald">↑ 4%</div>
+            </div>
+            <div class="stat-value-group">
+              <h2>92</h2>
+              <p class="stat-title">Comments</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+          <div class="content-card">
+            <h2>Views Overview</h2>
+            <p class="card-subtitle">Daily video watch time distribution</p>
+
+            <div class="fake-chart">
+              <div style="height: 35%" title="Mon: 350 views"></div>
+              <div style="height: 45%" title="Tue: 450 views"></div>
+              <div style="height: 30%" title="Wed: 300 views"></div>
+              <div style="height: 60%" title="Thu: 600 views"></div>
+              <div style="height: 52%" title="Fri: 520 views"></div>
+              <div style="height: 75%" title="Sat: 750 views"></div>
+              <div style="height: 90%" title="Sun: 900 views"></div>
+            </div>
+            <div class="bar-labels">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <h2>Top Videos</h2>
+            <p class="card-subtitle">Highest performing content</p>
+
+            <div class="video-list">
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="UI/UX Design Tips">
+                </div>
+                <div class="video-info">
+                  <h4>UI/UX Design Tips</h4>
+                  <p class="video-meta">2.1K views • 98% positive</p>
+                </div>
+              </div>
+
+              <div class="video-item">
+                <div class="video-thumb-box">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=200&q=80" alt="My Productivity Setup">
+                </div>
+                <div class="video-info">
+                  <h4>My Productivity Setup</h4>
+                  <p class="video-meta">1.4K views • 95% positive</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- UPLOAD PAGE -->
+      <section id="upload" class="page">
+
+        <div class="page-heading">
+          <h1>Upload Video</h1>
+          <span>Share your next idea with the world.</span>
+        </div>
+
+        <div class="upload-layout">
+
+          <div class="upload-box" id="dropArea">
+            <div class="upload-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                <polyline points="12 13 12 9 9 12"></polyline>
+                <polyline points="12 9 15 12"></polyline>
+              </svg>
+            </div>
+
+            <h3>Drag and drop your video here</h3>
+            <p>Support MP4, MOV, or WEBM up to 10GB</p>
+
+            <label for="videoFile" class="primary-btn choose-file-btn">
+              Choose File
+            </label>
+
+            <input
+              type="file"
+              id="videoFile"
+              accept="video/*"
+              hidden
+            />
+
+            <p id="fileName" class="file-name">
+              No file selected
+            </p>
+          </div>
+
+          <form class="upload-form" id="uploadForm" onsubmit="return false;">
+
+            <label for="videoTitle">Title</label>
+            <input
+              type="text"
+              id="videoTitle"
+              placeholder="Enter your video title"
+              required
+            />
+
+            <label for="videoDescription">Description</label>
+            <textarea
+              id="videoDescription"
+              placeholder="Tell viewers about your video..."
+            ></textarea>
+
+            <label for="thumbFile">Thumbnail</label>
+            <input type="file" id="thumbFile" accept="image/*" />
+
+            <label for="videoTags">Tags</label>
+            <input
+              type="text"
+              id="videoTags"
+              placeholder="youtube, creators, productivity"
+            />
+
+            <div class="publishing-card">
+              <h3>Publishing Options</h3>
+
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="publish"
+                    value="now"
+                    checked
+                  />
+                  <span>Publish Now</span>
+                </label>
+
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="publish"
+                    value="schedule"
+                  />
+                  <span>Schedule for Later</span>
+                </label>
+              </div>
+
+              <div
+                id="scheduleOptions"
+                class="schedule-options"
+              >
+                <div>
+                  <label for="scheduleDate">Date</label>
+                  <input
+                    type="date"
+                    id="scheduleDate"
+                  />
+                </div>
+                <div>
+                  <label for="scheduleTime">Time</label>
+                  <input
+                    type="time"
+                    id="scheduleTime"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="secondary-btn"
+                id="saveDraftButton"
+              >
+                Save as Draft
+              </button>
+
+              <button
+                type="button"
+                class="primary-btn"
+                id="publishButton"
+              >
+                Publish Video
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </section>
+
+
+      <!-- PLANNER PAGE (ADVANCED CALENDAR & FILTERS) -->
+      <section id="planner" class="page">
+
+        <div class="page-heading">
+          <h1>Content Planner</h1>
+          <span>See when your content was published or scheduled.</span>
+        </div>
+
+        <div class="planner-tabs">
+          <button class="planner-filter active-filter" data-filter="all">
+            All
+          </button>
+
+          <button class="planner-filter" data-filter="published">
+            Published
+          </button>
+
+          <button class="planner-filter" data-filter="scheduled">
+            Scheduled
+          </button>
+
+          <button class="planner-filter" data-filter="draft">
+            Drafts
+          </button>
+        </div>
+
+        <div class="planner-grid">
+
+          <!-- CALENDAR -->
+          <div class="content-card">
+
+            <div class="calendar-header">
+              <button id="prevMonth">←</button>
+              <h2 id="calendarMonth"></h2>
+              <button id="nextMonth">→</button>
+            </div>
+
+            <div class="calendar-weekdays">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+
+            <div id="calendarDays" class="calendar-days"></div>
+
+            <div class="calendar-legend">
+              <span>
+                <i class="legend-dot published-dot"></i>
+                Published
+              </span>
+
+              <span>
+                <i class="legend-dot scheduled-dot"></i>
+                Scheduled
+              </span>
+
+              <span>
+                <i class="legend-dot draft-dot"></i>
+                Draft
+              </span>
+            </div>
+
+          </div>
+
+          <!-- CONTENT LIST -->
+          <div class="content-card">
+
+            <div class="card-title">
+              <div>
+                <h2 id="plannerTitle">Content</h2>
+                <p id="plannerSubtitle">Your published and upcoming videos</p>
+              </div>
+
+              <button id="showAllContent" class="small-button">
+                View All
+              </button>
+            </div>
+
+            <div id="plannerList"></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SETTINGS PAGE -->
+      <section id="settings" class="page">
+
+        <div class="page-heading">
+          <h1>Settings</h1>
+          <span>Manage your account preferences and integrations.</span>
+        </div>
+
+        <div class="settings-grid">
+
+          <div class="content-card">
+            <h2>Profile Information</h2>
+
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                id="profileName"
+                value="Subhana"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="profileEmail"
+                value="subhana@gmail.com"
+              />
+            </div>
+
+            <button class="secondary-btn" id="editProfileButton">
+              Save Profile
+            </button>
+          </div>
+
+          <div class="content-card">
+            <h2>YouTube Channel</h2>
+            <p class="card-subtitle">Connected social media accounts</p>
+
+            <div class="youtube-card">
+              <div class="youtube-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                </svg>
+              </div>
+
+              <div class="youtube-info">
+                <h3>Subhana Creates</h3>
+                <p>320 subscribers</p>
+                <span class="connected" id="channelStatus">
+                  ● Connected
+                </span>
+              </div>
+            </div>
+
+            <button
+              class="secondary-btn"
+              id="disconnectButton"
+            >
+              Disconnect
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <div id="toast" class="toast">Action completed successfully!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
