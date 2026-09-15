@@ -1,0 +1,115 @@
+[
+  {
+    "id": 1,
+    "title": "How I Plan My Content",
+    "description": "My complete workflow for brainstorming, scripting, and scheduling weekly YouTube content.",
+    "thumbnail": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "planning",
+      "youtube",
+      "workflow"
+    ],
+    "status": "published",
+    "publishedDate": "2026-08-22",
+    "publishedTime": "11:00",
+    "scheduledDate": null,
+    "scheduledTime": null,
+    "date": "2026-08-22",
+    "time": "11:00",
+    "createdAt": "2026-08-22T11:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "My Productivity Setup",
+    "description": "Desk tour, software tools, lighting, and productivity setup for full-time content creators.",
+    "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "productivity",
+      "workspace",
+      "gear"
+    ],
+    "status": "published",
+    "publishedDate": "2026-09-03",
+    "publishedTime": "16:00",
+    "scheduledDate": null,
+    "scheduledTime": null,
+    "date": "2026-09-03",
+    "time": "16:00",
+    "createdAt": "2026-09-03T16:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "UI/UX Design Tips for Creators",
+    "description": "How to design high-CTR thumbnails and clean visual graphics for your channel.",
+    "thumbnail": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "design",
+      "uiux",
+      "thumbnails"
+    ],
+    "status": "scheduled",
+    "publishedDate": null,
+    "publishedTime": null,
+    "scheduledDate": "2026-09-18",
+    "scheduledTime": "10:00",
+    "date": "2026-09-18",
+    "time": "10:00",
+    "createdAt": "2026-09-10T10:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "My 2026 Workspace Tour",
+    "description": "In-depth walkthrough of my updated desk setup, camera gear, and studio acoustics.",
+    "thumbnail": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "tour",
+      "workspace",
+      "studio"
+    ],
+    "status": "scheduled",
+    "publishedDate": null,
+    "publishedTime": null,
+    "scheduledDate": "2026-09-25",
+    "scheduledTime": "12:00",
+    "date": "2026-09-25",
+    "time": "12:00",
+    "createdAt": "2026-09-10T12:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "Q&A With Subscribers",
+    "description": "Answering community questions about video editing, gear recommendations, and monetization.",
+    "thumbnail": "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "qna",
+      "community"
+    ],
+    "status": "draft",
+    "publishedDate": null,
+    "publishedTime": null,
+    "scheduledDate": null,
+    "scheduledTime": null,
+    "date": "2026-09-15",
+    "time": "",
+    "createdAt": "2026-09-12T14:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "title": "New Video Idea: AI Editing Workflows",
+    "description": "Exploring AI automated captioning and colour grading tools for faster turnaround.",
+    "thumbnail": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+    "tags": [
+      "ai",
+      "video-editing",
+      "tools"
+    ],
+    "status": "draft",
+    "publishedDate": null,
+    "publishedTime": null,
+    "scheduledDate": null,
+    "scheduledTime": null,
+    "date": "2026-09-22",
+    "time": "",
+    "createdAt": "2026-09-14T09:30:00.000Z"
+  }
+]

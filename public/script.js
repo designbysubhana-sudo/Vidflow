@@ -1,5 +1,5 @@
 /* =============================================
-   VIDFLOW CREATOR DASHBOARD
+   VIDFLOW CREATOR DASHBOARD (NODE.JS / EXPRESS)
 ============================================= */
 
 /* POPULATE CREATOR PROFILE INFO */
@@ -80,136 +80,137 @@ if (quickAnalytics) {
 
 
 /* =============================================
+   BACKEND REST API & VIDEO DATA
+============================================= */
+
+let videos = [];
+
+/**
+ * Fetch all videos from Express backend API
+ */
+async function loadVideos() {
+  try {
+    const response = await fetch('/api/videos');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    videos = await response.json();
+    updateEverything();
+  } catch (err) {
+    console.error('Failed to load videos from server:', err);
+  }
+}
+
+/**
+ * Create a new video via Express backend API
+ */
+async function createVideoOnBackend(videoData) {
+  try {
+    const response = await fetch('/api/videos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(videoData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to save video');
+    }
+
+    const savedVideo = await response.json();
+    await loadVideos();
+    return savedVideo;
+  } catch (err) {
+    console.error('Error creating video:', err);
+    alert(`Error saving video: ${err.message}`);
+    return null;
+  }
+}
+
+/**
+ * Delete a video via Express backend API
+ */
+async function deleteVideoOnBackend(id) {
+  try {
+    const response = await fetch(`/api/videos/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to delete video');
+    }
+
+    await loadVideos();
+    return true;
+  } catch (err) {
+    console.error('Error deleting video:', err);
+    alert(`Error deleting video: ${err.message}`);
+    return false;
+  }
+}
+
+
+/* =============================================
    YOUTUBE API SERVICE (MODULAR ABSTRACTION)
 ============================================= */
 
 const YouTubeService = {
+  async getStatus() {
+    try {
+      const res = await fetch('/api/youtube/status');
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn('YouTube status API offline:', e);
+    }
+    return { connected: localStorage.getItem("youtubeConnected") !== "false" };
+  },
+
   async connectChannel() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
+    try {
+      const res = await fetch('/api/youtube/connect', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
         localStorage.setItem("youtubeConnected", "true");
-        resolve({
-          connected: true,
-          channelName: "Subhana Official",
-          subscribers: "12.4K"
-        });
-      }, 200);
-    });
+        return data;
+      }
+    } catch (e) {
+      console.warn('YouTube connect API fallback:', e);
+    }
+    localStorage.setItem("youtubeConnected", "true");
+    return { connected: true, channelTitle: "Subhana Official" };
   },
 
   async disconnectChannel() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
+    try {
+      const res = await fetch('/api/youtube/disconnect', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
         localStorage.setItem("youtubeConnected", "false");
-        resolve({ connected: false });
-      }, 200);
-    });
+        return data;
+      }
+    } catch (e) {
+      console.warn('YouTube disconnect API fallback:', e);
+    }
+    localStorage.setItem("youtubeConnected", "false");
+    return { connected: false };
   },
 
   async fetchChannelStats() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          subscribers: "12,480",
-          views: "148,200",
-          watchTime: "4,320 hrs",
-          growth: "+20%"
-        });
-      }, 150);
-    });
-  },
-
-  async uploadVideo(videoData) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          youtubeId: "yt_" + Date.now(),
-          ...videoData
-        });
-      }, 300);
-    });
+    try {
+      const res = await fetch('/api/youtube/stats');
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn('YouTube stats API fallback:', e);
+    }
+    return {
+      subscribers: "12,480",
+      views: "148,200",
+      watchTime: "4,320 hrs",
+      growth: "+20%"
+    };
   }
 };
-
-
-/* =============================================
-   SAMPLE VIDEO DATABASE (DYNAMIC DATE GENERATION)
-============================================= */
-
-function generateDefaultVideos() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-
-  const prevMonthDate = new Date(year, month - 1, 22);
-  const latePrevMonthDate = new Date(year, month - 1, 29);
-  const earlyCurrMonthDate = new Date(year, month, 3);
-  const midCurrMonthDate = new Date(year, month, 15);
-  const lateCurrMonthDate = new Date(year, month, 22);
-  const draftDate = new Date(year, month, 18);
-
-  return [
-    {
-      id: 1,
-      title: "How I Plan My Content",
-      date: formatDateForDatabase(prevMonthDate),
-      time: "11:00",
-      status: "published"
-    },
-    {
-      id: 2,
-      title: "My Productivity Setup",
-      date: formatDateForDatabase(latePrevMonthDate),
-      time: "14:30",
-      status: "published"
-    },
-    {
-      id: 3,
-      title: "Q&A With Subscribers",
-      date: formatDateForDatabase(earlyCurrMonthDate),
-      time: "16:00",
-      status: "published"
-    },
-    {
-      id: 4,
-      title: "UI/UX Design Tips",
-      date: formatDateForDatabase(midCurrMonthDate),
-      time: "10:00",
-      status: "scheduled"
-    },
-    {
-      id: 5,
-      title: "My Workspace Tour",
-      date: formatDateForDatabase(lateCurrMonthDate),
-      time: "12:00",
-      status: "scheduled"
-    },
-    {
-      id: 6,
-      title: "New Video Idea",
-      date: formatDateForDatabase(draftDate),
-      time: "",
-      status: "draft"
-    }
-  ];
-}
-
-
-/* =============================================
-   LOCAL STORAGE
-============================================= */
-
-let videos = JSON.parse(localStorage.getItem("vidflowVideos"));
-
-if (!videos || !Array.isArray(videos) || videos.length === 0) {
-  videos = generateDefaultVideos();
-  saveVideos();
-}
-
-function saveVideos() {
-  localStorage.setItem("vidflowVideos", JSON.stringify(videos));
-}
 
 
 /* =============================================
@@ -287,6 +288,11 @@ function getVideoTitle() {
   return titleInput?.value.trim() || "";
 }
 
+function getVideoDescription() {
+  const descInput = document.getElementById("videoDescription");
+  return descInput?.value.trim() || "";
+}
+
 
 /* =============================================
    SAVE AS DRAFT
@@ -295,7 +301,7 @@ function getVideoTitle() {
 const saveDraftButton = document.getElementById("saveDraftButton");
 
 if (saveDraftButton) {
-  saveDraftButton.addEventListener("click", () => {
+  saveDraftButton.addEventListener("click", async () => {
     const title = getVideoTitle();
 
     if (!title) {
@@ -303,21 +309,29 @@ if (saveDraftButton) {
       return;
     }
 
+    const description = getVideoDescription();
     const today = getTodayString();
-    const draft = {
-      id: Date.now(),
+
+    const draftData = {
       title: title,
+      description: description,
       date: today,
       time: "",
       status: "draft"
     };
 
-    videos.push(draft);
-    saveVideos();
-    updateEverything();
-    clearUploadForm();
+    saveDraftButton.disabled = true;
+    saveDraftButton.textContent = "Saving...";
 
-    alert("Video saved as draft.");
+    const result = await createVideoOnBackend(draftData);
+
+    saveDraftButton.disabled = false;
+    saveDraftButton.textContent = "Save Draft";
+
+    if (result) {
+      clearUploadForm();
+      alert("Video saved as draft!");
+    }
   });
 }
 
@@ -327,7 +341,7 @@ if (saveDraftButton) {
 ============================================= */
 
 if (publishButton) {
-  publishButton.addEventListener("click", () => {
+  publishButton.addEventListener("click", async () => {
     const title = getVideoTitle();
 
     if (!title) {
@@ -335,27 +349,36 @@ if (publishButton) {
       return;
     }
 
+    const description = getVideoDescription();
     const selectedOption = document.querySelector('input[name="publish"]:checked');
     if (!selectedOption) return;
 
     /* PUBLISH NOW */
     if (selectedOption.value === "now") {
       const now = new Date();
-      const newVideo = {
-        id: Date.now(),
+      const videoData = {
         title: title,
+        description: description,
+        publishedDate: formatDateForDatabase(now),
+        publishedTime: formatTimeForDatabase(now),
         date: formatDateForDatabase(now),
         time: formatTimeForDatabase(now),
         status: "published"
       };
 
-      videos.push(newVideo);
-      saveVideos();
-      updateEverything();
-      clearUploadForm();
+      publishButton.disabled = true;
+      publishButton.textContent = "Publishing...";
 
-      alert("Video published successfully!");
-      openPlannerAtDate(newVideo.date);
+      const result = await createVideoOnBackend(videoData);
+
+      publishButton.disabled = false;
+      publishButton.textContent = "Publish Video";
+
+      if (result) {
+        clearUploadForm();
+        alert("Video published successfully!");
+        openPlannerAtDate(result.date);
+      }
     }
 
     /* SCHEDULE */
@@ -364,7 +387,7 @@ if (publishButton) {
       const time = document.getElementById("scheduleTime").value;
 
       if (!date || !time) {
-        alert("Please select date and time.");
+        alert("Please select both date and time.");
         return;
       }
 
@@ -374,21 +397,29 @@ if (publishButton) {
         return;
       }
 
-      const newVideo = {
-        id: Date.now(),
+      const videoData = {
         title: title,
+        description: description,
+        scheduledDate: date,
+        scheduledTime: time,
         date: date,
         time: time,
         status: "scheduled"
       };
 
-      videos.push(newVideo);
-      saveVideos();
-      updateEverything();
-      clearUploadForm();
+      publishButton.disabled = true;
+      publishButton.textContent = "Scheduling...";
 
-      alert("Video scheduled successfully!");
-      openPlannerAtDate(date);
+      const result = await createVideoOnBackend(videoData);
+
+      publishButton.disabled = false;
+      publishButton.textContent = "Schedule Video";
+
+      if (result) {
+        clearUploadForm();
+        alert("Video scheduled successfully!");
+        openPlannerAtDate(date);
+      }
     }
   });
 }
@@ -416,7 +447,7 @@ function clearUploadForm() {
 
 
 /* =============================================
-   CALENDAR
+   CALENDAR & PLANNER
 ============================================= */
 
 const calendarMonth = document.getElementById("calendarMonth");
@@ -452,7 +483,7 @@ function renderCalendar() {
   const firstDay = new Date(year, month, 1).getDay();
   const numberOfDays = new Date(year, month + 1, 0).getDate();
 
-  /* EMPTY DAYS */
+  /* EMPTY DAYS FOR PRECEDING MONTH PADDING */
   for (let i = 0; i < firstDay; i++) {
     const empty = document.createElement("div");
     empty.className = "calendar-day empty";
@@ -518,7 +549,7 @@ function renderCalendar() {
 
 
 /* =============================================
-   MONTH BUTTONS
+   MONTH NAVIGATION BUTTONS
 ============================================= */
 
 if (prevMonthButton) {
@@ -552,6 +583,7 @@ function showMonthVideos() {
   const month = calendarDate.getMonth();
 
   let monthVideos = videos.filter(video => {
+    if (!video.date) return false;
     const parts = video.date.split("-");
     const videoYear = Number(parts[0]);
     const videoMonth = Number(parts[1]) - 1;
@@ -569,7 +601,7 @@ function showMonthVideos() {
 
 
 /* =============================================
-   CLICK DATE
+   CLICK DATE HANDLER
 ============================================= */
 
 function showVideosForDate(dateString) {
@@ -601,9 +633,13 @@ function renderVideoList(list) {
     const row = document.createElement("div");
     row.className = "planner-video";
 
+    const thumbnailSrc = video.thumbnail || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=200&q=80";
+
     row.innerHTML = `
       <div class="planner-video-left">
-        <div class="planner-thumbnail">▶</div>
+        <div class="planner-thumbnail">
+          <img src="${escapeHTML(thumbnailSrc)}" alt="Thumbnail" onerror="this.onerror=null;this.parentElement.innerHTML='▶';" />
+        </div>
         <div>
           <h4>${escapeHTML(video.title)}</h4>
           <p>${readableDate(video.date)} ${video.time ? " • " + readableTime(video.time) : ""}</p>
@@ -630,7 +666,7 @@ function renderVideoList(list) {
 function addDeleteListeners() {
   const deleteButtons = document.querySelectorAll(".delete-video");
   deleteButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       const id = Number(button.dataset.id);
       const video = videos.find(item => item.id === id);
 
@@ -639,14 +675,15 @@ function addDeleteListeners() {
       const confirmDelete = confirm(`Delete "${video.title}"?`);
       if (!confirmDelete) return;
 
-      videos = videos.filter(item => item.id !== id);
-      saveVideos();
-      updateEverything();
+      button.disabled = true;
+      const success = await deleteVideoOnBackend(id);
 
-      if (selectedCalendarDate) {
-        showVideosForDate(selectedCalendarDate);
-      } else {
-        showMonthVideos();
+      if (success) {
+        if (selectedCalendarDate) {
+          showVideosForDate(selectedCalendarDate);
+        } else {
+          showMonthVideos();
+        }
       }
     });
   });
@@ -702,6 +739,7 @@ if (showAllContent) {
 ============================================= */
 
 function openPlannerAtDate(dateString) {
+  if (!dateString) return;
   const [year, month] = dateString.split("-").map(Number);
   calendarDate = new Date(year, month - 1, 1);
   selectedCalendarDate = dateString;
@@ -846,6 +884,7 @@ function formatTimeForDatabase(date) {
 }
 
 function readableDate(dateString) {
+  if (!dateString) return "";
   const [year, month, day] = dateString.split("-").map(Number);
   const date = new Date(year, month - 1, day);
   return new Intl.DateTimeFormat("en-US", {
@@ -856,6 +895,7 @@ function readableDate(dateString) {
 }
 
 function readableTime(time) {
+  if (!time) return "";
   const [hours, minutes] = time.split(":").map(Number);
   const date = new Date();
   date.setHours(hours, minutes, 0, 0);
@@ -870,10 +910,12 @@ function sortVideos(a, b) {
 }
 
 function capitalize(text) {
+  if (!text) return "";
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 function escapeHTML(text) {
+  if (!text) return "";
   const div = document.createElement("div");
   div.textContent = text;
   return div.innerHTML;
@@ -881,9 +923,8 @@ function escapeHTML(text) {
 
 
 /* =============================================
-   START APP
+   INITIALIZE APPLICATION
 ============================================= */
 
-renderCalendar();
-showMonthVideos();
-updateHomeStats();
+// Load all videos from Express API and render dashboard
+loadVideos();
